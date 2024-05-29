@@ -38,7 +38,7 @@ public final class Battlecraft extends JavaPlugin {
             @Override
             public void run() {
                 for (Entity entity : Objects.requireNonNull(Bukkit.getWorld("world")).getEntities()) {
-                    if (entity instanceof Item && ((Item) entity).getItemStack().getType().equals(Material.BLUE_BANNER)) {
+                    if (entity instanceof Item && (((Item) entity).getItemStack().getType().equals(Material.BLUE_BANNER) || ((Item) entity).getItemStack().getType().equals(Material.RED_BANNER))) {
                         entity.setGlowing(true);
                     }
                 }
