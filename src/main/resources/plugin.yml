@@ -1,0 +1,4 @@
+name: Battlecraft
+version: '${project.version}'
+main: com.al1kss.battlecraft.Battlecraft
+api-version: '1.16'
