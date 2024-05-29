@@ -2,3 +2,14 @@ name: Battlecraft
 version: '${project.version}'
 main: com.al1kss.battlecraft.Battlecraft
 api-version: '1.16'
+commands:
+  check:
+    description: "This is a command"
+    usage: "/check"
+    permission: permission.node
+    permission-message: "You do not have permission to use this command"
+  glow:
+    description: "This is a command"
+    usage: "/glow"
+    permission: permission.node
+    permission-message: "You do not have permission to use this command"
