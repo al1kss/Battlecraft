@@ -28,7 +28,7 @@ public class Events {
 
 
         ItemStack banner = new ItemStack(banners);
-        armorStand.getEquipment().setItemInMainHand(banner);
+        armorStand.getEquipment().setHelmet(banner);
 
         new BukkitRunnable() {
             @Override
@@ -40,7 +40,7 @@ public class Events {
                 }
 
                 Location playerLocation = player.getLocation();
-                armorStand.teleport(playerLocation.add(0, 1.0, 0)); // Adjust the Y coordinate as needed
+                armorStand.teleport(playerLocation.add(0, 0.1, 0)); // Adjust the Y coordinate as needed
             }
         }.runTaskTimer(JavaPlugin.getProvidingPlugin(Battlecraft.class), 0L, 1L);
     }

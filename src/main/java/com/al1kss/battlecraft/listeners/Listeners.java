@@ -48,17 +48,19 @@ public class Listeners implements Listener {
         World world = player.getWorld();
         Material red = Material.RED_BANNER;
         Material blue = Material.BLUE_BANNER;
+
+        // Check for existing armor stands holding red or blue banners
         boolean hasRedBannerStand = false;
         boolean hasBlueBannerStand = false;
 
         for (Entity entity : world.getEntities()) {
             if (entity instanceof ArmorStand) {
                 ArmorStand armorStand = (ArmorStand) entity;
-                ItemStack itemInHand = armorStand.getEquipment().getItemInMainHand();
+                ItemStack helmet = armorStand.getEquipment().getHelmet();
 
-                if (itemInHand != null && itemInHand.getType() == red) {
+                if (helmet != null && helmet.getType() == red) {
                     hasRedBannerStand = true;
-                } else if (itemInHand != null && itemInHand.getType() == blue) {
+                } else if (helmet != null && helmet.getType() == blue) {
                     hasBlueBannerStand = true;
                 }
 
