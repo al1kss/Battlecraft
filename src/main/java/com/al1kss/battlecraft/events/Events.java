@@ -7,6 +7,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
 
@@ -93,16 +95,27 @@ public class Events {
         ItemStack banner = new ItemStack(banners);
         armorStand.getEquipment().setHelmet(banner);
 
+
+
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!player.isOnline() || armorStand.isDead() || !player.getInventory().contains(banner)) {
+                if (armorStand.isDead() || !player.getInventory().contains(banner)) {
                     this.cancel();
                     armorStand.remove();
+                    return;
+                } else if (!player.isOnline()) {
+                    this.cancel();
+                    armorStand.remove();
+                    player.getInventory().remove(banner);
+                    Bukkit.getWorlds().get(0).dropItemNaturally(player.getLocation(), banner);
                     return;
                 }
 
                 Location playerLocation = player.getLocation();
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10, 1));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 1));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 10, 2));
                 armorStand.teleport(playerLocation.add(0, 0.08, 0)); // Adjust the Y coordinate as needed
             }
         }.runTaskTimer(JavaPlugin.getProvidingPlugin(Battlecraft.class), 0L, 1L);

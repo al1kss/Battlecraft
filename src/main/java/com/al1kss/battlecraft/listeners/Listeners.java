@@ -16,6 +16,8 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 
@@ -99,6 +101,8 @@ public class Listeners implements Listener {
             } else {
                 event.setCancelled(true);
             }
+        } else if (event.getBlock().getType().equals(Material.RED_BANNER) || event.getBlock().getType().equals(Material.BLUE_BANNER)) {
+            event.setCancelled(true);
         }
     }
 

@@ -4,6 +4,7 @@ import com.al1kss.battlecraft.commands.Commands;
 import com.al1kss.battlecraft.listeners.GUIListener;
 import com.al1kss.battlecraft.listeners.Listeners;
 import org.bukkit.*;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -30,11 +31,11 @@ public final class Battlecraft extends JavaPlugin {
     }
 
     public static Location getRedBeacon(){
-        return new Location(Bukkit.getWorld("world"), 5, 70, 5);
+        return new Location(Bukkit.getWorlds().get(0), 382, 63, -221);
     }
 
     public static Location getBlueBeacon(){
-        return new Location(Bukkit.getWorld("world"), 7, 70, 7);
+        return new Location(Bukkit.getWorlds().get(0), -321, 62, 201);
     }
 
     public static void setPlugin(Plugin plugin) {
@@ -42,16 +43,16 @@ public final class Battlecraft extends JavaPlugin {
     }
     @Override
     public void onEnable() {
-        World world = Objects.requireNonNull(Bukkit.getWorld("world"));
+        World world = Bukkit.getWorlds().get(0);
 
         //change coods of flags
-        redBL.add(new Location(world, 0, 70, 0));
-        redBL.add(new Location(world, 1,70,0));
-        redBL.add(new Location(world, 2, 70, 0));
+        redBL.add(new Location(world, 388, 63, -227));
+        redBL.add(new Location(world, 381,63,-227));
+        redBL.add(new Location(world, 375, 63, -227));
 
-        blueBL.add(new Location(world, 0, 70, 3));
-        blueBL.add(new Location(world, 0,70,1));
-        blueBL.add(new Location(world, 0, 70, 2));
+        blueBL.add(new Location(world, -328, 63, 207));
+        blueBL.add(new Location(world, -320,63,207));
+        blueBL.add(new Location(world, -314, 63, 207));
 
 
         // Plugin startup logic
@@ -71,12 +72,13 @@ public final class Battlecraft extends JavaPlugin {
             @Override
             public void run() {
                 long currentTime = System.currentTimeMillis();
-                World world = Objects.requireNonNull(Bukkit.getWorld("world"));
+                World world = Bukkit.getWorlds().get(0);
 
 
                 //hcmode setup if beacon is placed
                 if (world.getBlockAt(getRedBeacon()).getType().equals(Material.BEACON)){
                     for (Player p : Bukkit.getOnlinePlayers()){
+                        p.sendMessage(world.toString());
                         String team = p.getPersistentDataContainer().get(new NamespacedKey(instance, "team"), PersistentDataType.STRING);
                         if (team.equalsIgnoreCase("blue")){
                             p.getPersistentDataContainer().set(new NamespacedKey(instance, "hcMode"), PersistentDataType.STRING, "on");
@@ -158,7 +160,13 @@ public final class Battlecraft extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        World world = Bukkit.getWorlds().get(0);
         // Plugin shutdown logic
+        for (Entity entity : world.getEntities()) {
+            if (entity instanceof ArmorStand) {
+                entity.remove();
+            }
+        }
     }
 
 }
