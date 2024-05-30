@@ -3,13 +3,27 @@ version: '${project.version}'
 main: com.al1kss.battlecraft.Battlecraft
 api-version: '1.16'
 commands:
-  check:
-    description: "This is a command"
-    usage: "/check"
+  divide:
+    description: "Divide randomly for teams"
+    usage: "/divide"
     permission: permission.node
     permission-message: "You do not have permission to use this command"
-  glow:
+  red:
     description: "This is a command"
-    usage: "/glow"
+    usage: "/red"
     permission: permission.node
     permission-message: "You do not have permission to use this command"
+  blue:
+    description: "Command"
+    usage: "/blue"
+    permission: permission.node
+    permission-message: "You do not have bla bla bla"
+  stats:
+    description: "Get all your stats"
+    usage: "/stats"
+    permission: foo.bar
+    permission-message: "You do not have permission to use this command"
+
+permissions:
+  foo.bar:
+    default: true
